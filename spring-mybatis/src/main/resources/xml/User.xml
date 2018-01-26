@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="study.dal.UserMapper">
+
+	<resultMap id="result" type="study.entity.User">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="user_name" jdbcType="VARCHAR" property="userName" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+	</resultMap>
+
+	<select id="list" resultMap="result">
+		select * from t_user
+	</select>
+
+</mapper>
