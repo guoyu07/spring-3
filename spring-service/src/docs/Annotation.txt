@@ -1,0 +1,59 @@
+JavaEE注解对应功能类似Spring注解
+@Named    <------>  @Component
+@Resource <------>  @Autowired
+@Inject   <------>  @Autowired
+-------------------------------------------------------------------------
+@Configuration
+任何一个标注了@Configuration的Java类定义都是一个JavaConfig配置类
+
+@Bean
+任何一个标注了@Bean的方法，其返回值将作为一个bean定义注册到Spring的IOC容器，方法名将默认成为该bean定义的id
+
+@ComponentScan
+该配置对应XML配置形式中的<context:component-scan />元素，用于配合一些元信息Java Annotation，通过basePackages属性来细粒度定制@ComponentScan自动扫描的范围，
+如果不制定，则默认Spring框架实现会从声明@ComponentScan所在类的package进行扫描
+
+@PropertySource与@PropertySources
+@PropertySource用于从某些地方加载*.properties文件内容，并将其中的属性加载到IOC容器中，便于填充一些bean定义属性的占位符（placeholder），需要PropertySourcesPlaceholderConfigurer的配合
+Java8或以上版本可以并行声明多个@PropertySource
+
+@Configuration
+@PropertySource("classpath:1.properties")
+@PropertySource("classpath:2.properties")
+public class XConfiguration {
+
+}
+
+Java7如果声明多个@PropertySource则需要使用@PropertySources
+
+@Configuration
+@PropertySources({@PropertySource("classpath:1.properties"),@PropertySource("classpath:2.properties")})
+public class XConfiguration {
+
+}
+
+@Import
+负责引入JavaConfig形式定义的IOC容器配置
+
+@ImportResource
+将遗留的XML配置引入到JavaConfig中
+
+@Profile("dev")
+配置不同环境下的Bean对象
+
+@ActiveProfiles("dev")
+激活dev环境下的配置Bean
+
+@Conditional
+条件化Bean，当条件为true时初始化Bean
+
+@Primary
+将某个Bean设置为首选Bean
+
+@Qualifier
+可以注解在class上，表示该bean的名称
+也可以与@Autowired一起使用，表示按照名称进行装配，单独的@Autowired表示按照类型进行装配
+
+
+
+
